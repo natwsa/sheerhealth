@@ -33,8 +33,7 @@ while True:
     answer = generate_answer(query, top_chunks)
     print(answer)
     rating = input("\nRate this answer from 1 to 5: ")
-
-    # Save interaction
+    
     entry = {
         "question": query,
         "chunks": top_chunks,
@@ -43,7 +42,6 @@ while True:
     }
     results.append(entry)
 
-    # Save to file incrementally
     with open("rag_feedback.json", "w") as f:
         json.dump(results, f, indent=2)
     print("Can I help you with anything else?")
