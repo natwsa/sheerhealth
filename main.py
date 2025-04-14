@@ -27,7 +27,7 @@ print("Do you have a question about your health plan?")
 while True:
     query = input("> ")
     if query.strip().lower() in {"no", "exit", "quit"}:
-        print("Okay, have a great day!")
+        print("Cya!")
         break
     top_chunks = retrieve_chunks(query)
     answer = generate_answer(query, top_chunks)
