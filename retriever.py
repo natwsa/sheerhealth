@@ -16,14 +16,12 @@ index.add(embeddings)
 
 
 def retrieve_chunks(query, k=3):
-    # Call OpenAI Embedding API
     response = openai.embeddings.create(
         input=query,
         model="text-embedding-ada-002"
     )
     query_embedding = np.array(response.data[0].embedding, dtype="float32")
 
-    # Search the FAISS index
     D, I = index.search(query_embedding.reshape(1, -1), k)
     return df.iloc[I[0]]["chunk"].tolist()
 
