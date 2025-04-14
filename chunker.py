@@ -6,7 +6,7 @@ from openai import OpenAI
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 import time
 
-pdf_path = "/Users/sandalowash/Downloads/purd.pdf"
+pdf_path = "/Users/sandalowash/Downloads/purd.pdf"  #put your path here
 reader = PdfReader(pdf_path)
 text = "\n".join(page.extract_text() for page in reader.pages if page.extract_text())
 
@@ -21,10 +21,8 @@ def chunk_text_with_overlap(text, max_words=500, overlap=50):
         i += max_words - overlap  # move forward with overlap
     return chunks
 
-# Apply the chunking
 chunks_with_overlap = chunk_text_with_overlap(text)
 
-# Convert to DataFrame
 df = pd.DataFrame({"chunk": chunks_with_overlap})
 
 embeddings = []
@@ -38,7 +36,6 @@ for i, chunk in enumerate(df["chunk"]):
         print(f"Error on chunk {i}: {e}")
         embeddings.append(None)
 
-# Add to DataFrame
 df["embedding"] = embeddings
 df.to_pickle("embeddings.pkl")
 
